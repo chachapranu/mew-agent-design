@@ -38,17 +38,19 @@ Transform Samsung Family Hub into an intelligent life assistant that proactively
 
 ```
 claude-code/
-├── README.md                              # Main architecture & scenarios
-├── ARCHITECTURE_SUMMARY.md               # This file
+├── README.md                              # Main architecture & scenarios  
+├── ARCHITECTURE_SUMMARY.md               # This summary document
 ├── agents/
 │   └── agent-definitions.md              # Detailed agent specifications
 ├── architecture/
+│   ├── intelligence-layer.md             # Hybrid intelligence system
 │   ├── device-extensibility-framework.md # Cross-device scaling
 │   └── api-contracts-communication.md    # API & messaging patterns
 ├── integrations/
 │   └── tizen-mcp-integration.md         # Tizen platform integration
 └── examples/
-    └── implementation-example.md         # Practical implementation
+    ├── implementation-example.md         # Practical implementation
+    └── sk-platform-integration.md       # SK function examples
 ```
 
 ## 🤖 Multi-Agent System
@@ -123,31 +125,52 @@ Agent → MCP Client → MCP Server → Tizen Hardware/Apps
 - **Why**: Cross-device compatibility, future-proofing
 - **Benefits**: Easy device addition, unified interface
 
+## 🧠 Hybrid Intelligence Architecture
+
+### Intelligence Strategy
+- **External LLMs**: Creative reasoning, complex analysis (GPT-4, Claude, Samsung LLM)
+- **Local ML Models**: Privacy-sensitive, real-time processing (Vision, NLP, TimeSeries)
+- **SK Native Functions**: Direct platform API integration for optimal performance
+- **Intelligent Routing**: Cost, latency, and privacy-aware model selection
+
+### Local Models (~200MB total)
+- **Vision Models**: YOLOv5-nano (10MB), MobileNetV3 (5MB), Freshness detector (15MB)
+- **NLP Models**: DistilBERT (65MB), TinyBERT (15MB), Sentiment analyzer (8MB)
+- **ML Models**: Prophet-lite (20MB), Recommendation engine (30MB)
+
+### SK Function Integration
+```csharp
+// Direct platform control with AI orchestration
+await kernel.InvokeAsync("FridgeFunctions", "GetInventory");
+await kernel.InvokeAsync("OvenFunctions", "PreheatOven", new { temp = 350 });
+var recipe = await kernel.InvokePromptAsync("Generate recipe with: " + inventory);
+```
+
 ## 🔧 Implementation Approach
 
-### Phase 1: MVP (Months 1-3)
-- Core orchestration system
-- Kitchen & Calendar agents
+### Phase 1: Foundation (Months 1-3)
+- Hybrid intelligence system setup
+- Core SK platform functions
+- Kitchen agent with local ML
 - Basic Tizen MCP integration
-- Chat interface
 
-### Phase 2: Enhanced Features (Months 4-6)
-- All 8 core agents
-- Advanced recipe generation
-- Family coordination features
-- Voice interface
+### Phase 2: Intelligence (Months 4-6)
+- All local ML models deployed
+- Multi-agent orchestration
+- Context-aware responses
+- Real-time event processing
 
-### Phase 3: Intelligence (Months 7-9)
-- Learning agent activation
-- Personalization engine
-- Proactive suggestions
-- Pattern recognition
+### Phase 3: Platform Integration (Months 7-9)
+- Complete device function library
+- Cross-device orchestration
+- Proactive assistance
+- Learning & personalization
 
-### Phase 4: Ecosystem (Months 10-12)
-- TV integration
-- Appliance control
-- Cross-device sync
-- Third-party plugins
+### Phase 4: Ecosystem Scale (Months 10-12)
+- Full Samsung ecosystem support
+- Third-party integrations
+- Advanced AI features
+- Performance optimization
 
 ## 📈 Success Metrics
 
