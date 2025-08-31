@@ -1,0 +1,67 @@
+graph TD
+    subgraph User_Interface["User Interface"]
+        UI[Samsung Family Hub UI / Voice Input]
+    end
+
+    subgraph Core_Logic["Core Logic (Semantic Kernel)"]
+        Orchestrator[Orchestrator Agent]
+        SK_Core["Semantic Kernel Core (Planner, Functions, Memory)"]
+        Orchestrator -- Uses --> SK_Core
+    end
+
+    subgraph Specialized_Agents["Specialized Agents (SK Plugins)"]
+        PIM_Agent["PIM Agent (Calendar, Notes, Contacts)"]
+        Entertainment_Agent["Entertainment Agent 
+        (Music, TV, Podcasts)"]
+        Recipe_Food_Agent["Recipe & Food Agent 
+        (Fridge, Recipes, Lists)"]
+        Device_Control_Agent["Device Control Agent 
+        (Volume, Temp, Settings)"]
+        Cross_Device_Agent["Cross-Device Agent 
+        (Handoff, Multi-device Scenes)"]
+        Web_Search_Agent[Web Search Agent]
+    end
+
+    subgraph Service_Data["Service & Data Layer"]
+        Tizen_MCP[Tizen MCP Server]
+        Cloud_Services["Cloud Services
+        (Weather, Search, Music APIs, LLMs)"]
+        UserDataStore["User Data Store
+        (Preferences, Routines, History)"]
+    end
+
+    subgraph Platform_Hardware["Platform & Hardware"]
+        Device_APIs["Device APIs 
+        (Fridge Cam, Temp Sensor)"]
+        Platform_Services[Tizen Platform Services]
+    end
+
+    subgraph External_Devices["External Devices"]
+        BT_Speaker[Samsung Bluetooth Speaker]
+        Waher[Samsung Washer]
+        TV[Samsung TV]
+    end
+
+    %% Connections
+    UI -- Raw Input --> Orchestrator
+    Orchestrator -- Delegates to --> PIM_Agent
+    Orchestrator -- Delegates to --> Entertainment_Agent
+    Orchestrator -- Delegates to --> Recipe_Food_Agent
+    Orchestrator -- Delegates to --> Device_Control_Agent
+    Orchestrator -- Delegates to --> Cross_Device_Agent
+    Orchestrator -- Delegates to --> Web_Search_Agent
+
+    Device_Control_Agent -- Issues Commands --> Tizen_MCP
+    Recipe_Food_Agent -- Accesses --> Tizen_MCP
+    Tizen_MCP -- Controls --> Device_APIs
+    Tizen_MCP -- Controls --> Platform_Services
+
+    PIM_Agent -- Accesses --> UserDataStore
+    PIM_Agent -- Accesses --> Cloud_Services
+    Entertainment_Agent -- Accesses --> Cloud_Services
+    Recipe_Food_Agent -- Accesses --> Cloud_Services
+    Web_Search_Agent -- Accesses --> Cloud_Services
+
+    Cross_Device_Agent -- Coordinates(A2A) --> TV
+    Cross_Device_Agent -- Coordinates(A2A) --> BT_Speaker
+    Cross_Device_Agent -- Coordinates(A2A) --> Waher
