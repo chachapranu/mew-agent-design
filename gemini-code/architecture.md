@@ -3,33 +3,33 @@
 
 ```mermaid
 graph TD
-    subgraph "User Interface"
+    subgraph User_Interface["User Interface"]
         UI[Samsung Family Hub UI / Voice Input]
     end
 
-    subgraph "Core Logic (Semantic Kernel)"
+    subgraph Core_Logic["Core Logic (Semantic Kernel)"]
         Orchestrator[Orchestrator Agent]
-        SK_Core[Semantic Kernel Core <br/> (Planner, Functions, Memory)]
+        SK_Core["Semantic Kernel Core\n(Planner, Functions, Memory)"]
         Orchestrator -- Uses --> SK_Core
     end
 
-    subgraph "Specialized Agents (Plugins)"
-        PIM_Agent[PIM Agent <br/> (Calendar, Notes, Contacts)]
-        Entertainment_Agent[Entertainment Agent <br/> (Music, TV, Podcasts)]
-        Recipe_Food_Agent[Recipe & Food Agent <br/> (Fridge, Recipes, Lists)]
-        Device_Control_Agent[Device Control Agent <br/> (Volume, Temp, Settings)]
-        Cross_Device_Agent[Cross-Device Agent <br/> (Handoff, Multi-device Scenes)]
+    subgraph Specialized_Agents["Specialized Agents (Plugins)"]
+        PIM_Agent["PIM Agent (Calendar, Notes, Contacts)"]
+        Entertainment_Agent["Entertainment Agent\n(Music, TV, Podcasts)"]
+        Recipe_Food_Agent["Recipe & Food Agent\n(Fridge, Recipes, Lists)"]
+        Device_Control_Agent["Device Control Agent\n(Volume, Temp, Settings)"]
+        Cross_Device_Agent["Cross-Device Agent\n(Handoff, Multi-device Scenes)"]
         Web_Search_Agent[Web Search Agent]
     end
 
-    subgraph "Service & Data Layer"
+    subgraph Service_Data["Service & Data Layer"]
         Tizen_MCP[Tizen MCP Server]
-        Cloud_Services[Cloud Services <br/> (Weather, Search, Music APIs, LLMs)]
-        UserDataStore[User Data Store <br/> (Preferences, Routines, History)]
+        Cloud_Services["Cloud Services\n(Weather, Search, Music APIs, LLMs)"]
+        UserDataStore["User Data Store\n(Preferences, Routines, History)"]
     end
 
-    subgraph "Platform & Hardware"
-        Device_APIs[Device APIs <br/> (Fridge Cam, Temp Sensor)]
+    subgraph Platform_Hardware["Platform & Hardware"]
+        Device_APIs["Device APIs\n(Fridge Cam, Temp Sensor)"]
         Platform_Services[Tizen Platform Services]
         BT_Speaker[Bluetooth Speaker]
         TV[Samsung TV]
