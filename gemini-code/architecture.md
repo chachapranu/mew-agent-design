@@ -9,29 +9,40 @@ graph TD
 
     subgraph Core_Logic["Core Logic (Semantic Kernel)"]
         Orchestrator[Orchestrator Agent]
-        SK_Core["Semantic Kernel Core\n(Planner, Functions, Memory)"]
+        SK_Core["Semantic Kernel Core (Planner, Functions, Memory)"]
         Orchestrator -- Uses --> SK_Core
     end
 
-    subgraph Specialized_Agents["Specialized Agents (Plugins)"]
+    subgraph Specialized_Agents["Specialized Agents (SK Plugins)"]
         PIM_Agent["PIM Agent (Calendar, Notes, Contacts)"]
-        Entertainment_Agent["Entertainment Agent\n(Music, TV, Podcasts)"]
-        Recipe_Food_Agent["Recipe & Food Agent\n(Fridge, Recipes, Lists)"]
-        Device_Control_Agent["Device Control Agent\n(Volume, Temp, Settings)"]
-        Cross_Device_Agent["Cross-Device Agent\n(Handoff, Multi-device Scenes)"]
+        Entertainment_Agent["Entertainment Agent 
+        (Music, TV, Podcasts)"]
+        Recipe_Food_Agent["Recipe & Food Agent 
+        (Fridge, Recipes, Lists)"]
+        Device_Control_Agent["Device Control Agent 
+        (Volume, Temp, Settings)"]
+        Cross_Device_Agent["Cross-Device Agent 
+        (Handoff, Multi-device Scenes)"]
         Web_Search_Agent[Web Search Agent]
     end
 
     subgraph Service_Data["Service & Data Layer"]
         Tizen_MCP[Tizen MCP Server]
-        Cloud_Services["Cloud Services\n(Weather, Search, Music APIs, LLMs)"]
-        UserDataStore["User Data Store\n(Preferences, Routines, History)"]
+        Cloud_Services["Cloud Services
+        (Weather, Search, Music APIs, LLMs)"]
+        UserDataStore["User Data Store
+        (Preferences, Routines, History)"]
     end
 
     subgraph Platform_Hardware["Platform & Hardware"]
-        Device_APIs["Device APIs\n(Fridge Cam, Temp Sensor)"]
+        Device_APIs["Device APIs 
+        (Fridge Cam, Temp Sensor)"]
         Platform_Services[Tizen Platform Services]
-        BT_Speaker[Bluetooth Speaker]
+    end
+
+    subgraph External_Devices["External Devices"]
+        BT_Speaker[Samsung Bluetooth Speaker]
+        Waher[Samsung Washer]
         TV[Samsung TV]
     end
 
@@ -55,8 +66,9 @@ graph TD
     Recipe_Food_Agent -- Accesses --> Cloud_Services
     Web_Search_Agent -- Accesses --> Cloud_Services
 
-    Cross_Device_Agent -- Coordinates --> TV
-    Cross_Device_Agent -- Coordinates --> BT_Speaker
+    Cross_Device_Agent -- Coordinates(A2A) --> TV
+    Cross_Device_Agent -- Coordinates(A2A) --> BT_Speaker
+    Cross_Device_Agent -- Coordinates(A2A) --> Waher
 ```
 
 ### Component Descriptions
