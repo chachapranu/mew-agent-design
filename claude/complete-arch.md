@@ -1,0 +1,107 @@
+# Complete Architecture
+
+```mermaid   
+graph TB
+    subgraph "Tizen Home Flow Agent"
+        subgraph "User Interface Layer"
+            UI[Chat Interface]
+            Voice[Voice Interface]
+            Touch[Touch Controls]
+            Gesture[Gesture Recognition]
+        end
+
+        subgraph "Orchestration Layer - Semantic Kernel"
+            Gateway[API Gateway/Request Router]
+            Orchestrator[Master Orchestrator Agent]
+            
+            subgraph "Specialized Agents"
+                Context[Context Agent]
+                Device[Device Control Agent]
+                Content[Content Agent]
+                Planning[Planning Agent]
+                Recipe[Recipe Agent]
+                Health[Health & Wellness Agent]
+                Home[Home Automation Agent]
+                Learn[Learning Agent]
+            end
+            
+            Memory[(Semantic Memory Store)]
+            State[(Conversation State)]
+        end
+
+        subgraph "Data Layer"
+            UserPref[(User Preferences)]
+            DeviceData[(Device Data)]
+            History[(Interaction History)]
+            Knowledge[(Knowledge Base)]
+        end
+    end
+
+    subgraph "Integration Layer"
+        MCP[Tizen MCP Server]
+        DeviceAPI[Device API Adapter]
+        CloudAPI[Samsung Cloud Services]
+        External[External Services API]
+    end
+
+    subgraph "Device Services - Tizen"
+        Fridge[Fridge Services<br/>- Inventory<br/>- Temperature<br/>- Camera]
+        Media[Media Services<br/>- TVPlus<br/>- Music<br/>- Display]
+        System[System Services<br/>- Bluetooth<br/>- WiFi<br/>- Settings]
+        Calendar[Calendar Service]
+        Notify[Notification Service]
+    end
+
+    subgraph "Cross-Device Services(A2A)"
+        DeviceReg[Device Registry]
+        Sync[State Synchronization]
+        EventBus[Event Bus]
+        Security[Security & Auth]
+    end
+
+    UI --> Gateway
+    Voice --> Gateway
+    Touch --> Gateway
+    Gesture --> Gateway
+    
+    Gateway --> Orchestrator
+    Orchestrator --> Context
+    Orchestrator --> Device
+    Orchestrator --> Content
+    Orchestrator --> Planning
+    Orchestrator --> Recipe
+    Orchestrator --> Health
+    Orchestrator --> Home
+    Orchestrator --> Learn
+    
+    Context --> Memory
+    Context --> State
+    Planning --> Memory
+    Learn --> History
+    
+    Device --> MCP
+    Device --> DeviceAPI
+    Content --> CloudAPI
+    Recipe --> External
+    Health --> External
+    Home --> DeviceReg
+    
+    MCP --> Fridge
+    MCP --> Media
+    MCP --> System
+    MCP --> Calendar
+    MCP --> Notify
+    
+    DeviceAPI --> DeviceReg
+    DeviceAPI --> Sync
+    DeviceAPI --> EventBus
+    
+    Memory --> UserPref
+    Memory --> DeviceData
+    Memory --> History
+    Memory --> Knowledge
+    
+    EventBus --> Sync
+    Security --> Gateway
+    Security --> CloudAPI
+```
